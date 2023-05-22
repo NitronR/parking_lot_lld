@@ -22,5 +22,5 @@ public interface ParkingLotCommand {
      * @param system      the ParkingLotSystem on which the command will be executed
      * @param commandLine the command line string
      */
-    void execute(ParkingLotSystem system, String commandLine);
+    CommandResult execute(ParkingLotSystem system, String commandLine);
 }

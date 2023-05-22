@@ -9,7 +9,8 @@ public class ParkVehicleCommand implements ParkingLotCommand {
     }
 
     @Override
-    public void execute(ParkingLotSystem system, String commandLine) {
+    public CommandResult execute(ParkingLotSystem system, String commandLine) {
         System.out.println("Parked vehicle. Ticket ID: <ticket_id>");
+        return null;
     }
 }

@@ -9,7 +9,8 @@ public class DisplayFreeCountCommand implements ParkingLotCommand {
     }
 
     @Override
-    public void execute(ParkingLotSystem system, String commandLine) {
+    public CommandResult execute(ParkingLotSystem system, String commandLine) {
         System.out.println("No. of free slots for <vehicle_type> on Floor <floor_no>: <no_of_free_slots>");
+        return null;
     }
 }

@@ -9,7 +9,8 @@ public class UnparkVehicleCommand implements ParkingLotCommand {
     }
 
     @Override
-    public void execute(ParkingLotSystem system, String commandLine) {
+    public CommandResult execute(ParkingLotSystem system, String commandLine) {
         System.out.println("Unparked vehicle with Registration Number: <reg_no> and Color: <color>");
+        return null;
     }
 }
