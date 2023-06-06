@@ -9,8 +9,12 @@ version = "1.0-SNAPSHOT"
 repositories {
     mavenCentral()
 }
+
 dependencies {
     implementation("org.mockito:mockito-core:5.2.0")
+    // https://projectlombok.org
+    compileOnly("org.projectlombok:lombok:1.18.26")
+    annotationProcessor("org.projectlombok:lombok:1.18.20")
 }
 
 // Configure Gradle IntelliJ Plugin
@@ -42,5 +46,18 @@ tasks {
 
     publishPlugin {
         token.set(System.getenv("PUBLISH_TOKEN"))
+    }
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+
+    withSourcesJar()
+    withJavadocJar()
+
+    // Enable annotation processing for Lombok
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(11))
     }
 }

@@ -1,6 +1,6 @@
 package parking_lot.commands;
 
-import com.example.parking_lot.ParkingLotSystem;
+import com.example.parking_lot.system.ParkingLotSystem;
 import com.example.parking_lot.commands.CommandResult;
 import com.example.parking_lot.commands.CreateParkingLotCommand;
 import org.junit.Before;
@@ -12,8 +12,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static parking_lot.constants.TestConstants.CREATE_PARKING_LOT_CMD_TEMPLATE;
-import static parking_lot.constants.TestConstants.DUMMY_PARKING_LOT_ID;
+import static parking_lot.constants.TestConstants.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CreateParkingLotCommandTests {
@@ -46,11 +45,16 @@ public class CreateParkingLotCommandTests {
 
         assertEquals(expectedResult, commandResult.getMessage());
         verify(parkingLotSystem, times(1))
-                .createParkingLot(DUMMY_PARKING_LOT_ID, numFloors, numSlots);
+                .createParkingLot(DUMMY_PARKING_LOT_ID, numFloors, DUMMY_SLOTS_LAYOUT);
     }
 
     @Test
     public void should_throwInvalidCommandException_whenInvalidCreateParkingLotCommandLinePassed() {
+
+    }
+
+    @Test
+    public void should_throwInvalidCommandException_whenNumSlotsIsNotPositive() {
 
     }
 
@@ -67,7 +71,12 @@ public class CreateParkingLotCommandTests {
 
         assertEquals(expectedResult, commandResult.getMessage());
         verify(parkingLotSystem, times(1))
-                .createParkingLot(DUMMY_PARKING_LOT_ID, numFloors, numSlots);
+                .createParkingLot(DUMMY_PARKING_LOT_ID, numFloors, DUMMY_SLOTS_LAYOUT);
+    }
+
+    @Test
+    public void should_throwParkingLotAlreadyCreatedException_when_parkingLotAlreadyCreated() {
+
     }
 
 }

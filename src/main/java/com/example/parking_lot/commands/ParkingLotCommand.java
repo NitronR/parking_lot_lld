@@ -1,7 +1,7 @@
 package com.example.parking_lot.commands;
 
 
-import com.example.parking_lot.ParkingLotSystem;
+import com.example.parking_lot.system.ParkingLotSystem;
 
 /**
  * The ParkingLotCommand interface represents a command that can be executed on a ParkingLotSystem.

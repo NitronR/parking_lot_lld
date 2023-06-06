@@ -1,6 +1,6 @@
 package com.example.parking_lot.commands;
 
-import com.example.parking_lot.ParkingLotSystem;
+import com.example.parking_lot.system.ParkingLotSystem;
 
 public class ParkVehicleCommand implements ParkingLotCommand {
     @Override

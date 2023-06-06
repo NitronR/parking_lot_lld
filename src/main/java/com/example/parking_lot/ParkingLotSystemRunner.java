@@ -1,6 +1,7 @@
 package com.example.parking_lot;
 
 import com.example.parking_lot.commands.*;
+import com.example.parking_lot.system.ParkingLotSystem;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
