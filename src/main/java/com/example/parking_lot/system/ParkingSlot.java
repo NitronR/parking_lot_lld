@@ -1,7 +1,9 @@
 package com.example.parking_lot.system;
 
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
+@Getter
 @EqualsAndHashCode
 public class ParkingSlot {
     private final int slotNumber;
@@ -12,11 +14,4 @@ public class ParkingSlot {
         this.vehicleTypeId = vehicleTypeId;
     }
 
-    public int getSlotNumber() {
-        return slotNumber;
-    }
-
-    public String getVehicleTypeId() {
-        return vehicleTypeId;
-    }
 }

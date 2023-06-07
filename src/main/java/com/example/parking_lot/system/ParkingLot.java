@@ -19,4 +19,19 @@ public class ParkingLot {
                 .collect(Collectors.toList());
     }
 
+    public void parkVehicle(Vehicle vehicle, PickedParkingSlot pickedParkingSlot) {
+        // TODO validate floor and slot number validity and availability
+        ParkingFloor parkingFloor = floors.get(pickedParkingSlot.getFloorNumber() - 1);
+        parkingFloor.parkVehicle(vehicle, pickedParkingSlot.getParkingSlotNumber());
+    }
+
+    public Vehicle unpark(int floorNumber, int slotNumber) {
+        return floors.get(floorNumber - 1).unpark(slotNumber);
+    }
+
+    public List<List<Integer>> getOccupiedSlotsPerFloor(String vehicleTypeId) {
+        return floors.stream()
+                .map(floor -> floor.getOccupiedSlots(vehicleTypeId))
+                .collect(Collectors.toList());
+    }
 }

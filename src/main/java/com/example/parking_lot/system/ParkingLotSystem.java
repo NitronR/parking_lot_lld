@@ -2,23 +2,30 @@ package com.example.parking_lot.system;
 
 import com.example.parking_lot.system.exception.ParkingLotAlreadyExists;
 import com.example.parking_lot.system.exception.ParkingLotNotFound;
-import com.google.common.collect.ImmutableList;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 public class ParkingLotSystem {
     private final Map<String, ParkingLot> parkingLots = new ConcurrentHashMap<>();
+    private final ParkingPickerStrategy parkingPickerStrategy;
 
-    public synchronized void createParkingLot(String parkingLotId, int numFloors, List<ParkingSlot> parkingSlots) {
+    public ParkingLotSystem(ParkingPickerStrategy parkingPickerStrategy) {
+        this.parkingPickerStrategy = parkingPickerStrategy;
+    }
+
+    public synchronized ParkingLot createParkingLot(String parkingLotId, int numFloors, List<ParkingSlot> parkingSlots) {
         if (parkingLots.containsKey(parkingLotId)) {
             throw new ParkingLotAlreadyExists("Parking lot already exists with given ID.");
         }
 
         ParkingLot parkingLot = new ParkingLot(parkingLotId, numFloors, parkingSlots);
         parkingLots.put(parkingLotId, parkingLot);
+
+        return parkingLot;
     }
 
     public List<Integer> getFreeSlotCountPerFloor(String parkingLotId, String vehicleTypeId) {
@@ -32,24 +39,41 @@ public class ParkingLotSystem {
     }
 
     public List<List<Integer>> getFreeSlotsPerFloor(String parkingLotId, String vehicleTypeId) {
-        return ImmutableList.of(
-                ImmutableList.of(4, 5, 6),
-                ImmutableList.of(4, 5, 6),
-                ImmutableList.of(4, 5, 6),
-                ImmutableList.of(4, 5, 6)
-        );
+        return parkingLots.get(parkingLotId).getFloors().stream()
+                .map(parkingFloor -> parkingFloor.getFreeSlots(vehicleTypeId))
+                .collect(Collectors.toList());
     }
 
     public List<List<Integer>> getOccupiedSlotsPerFloor(String parkingLotId, String vehicleTypeId) {
-        return ImmutableList.of(
-                ImmutableList.of(),
-                ImmutableList.of(),
-                ImmutableList.of(),
-                ImmutableList.of()
-        );
+        return parkingLots.get(parkingLotId).getOccupiedSlotsPerFloor(vehicleTypeId);
     }
 
-    public void park(String parkingLotId, String vehicleTypeId, String registrationNumber, String color) {
+    public Optional<String> park(String parkingLotId, String vehicleTypeId, String registrationNumber,
+                                 String color) {
+        // TODO check if parkingLotId valid
+        ParkingLot parkingLot = parkingLots.get(parkingLotId);
+        Optional<PickedParkingSlot> pickedParkingSlotOptional = parkingPickerStrategy.pickParkingSlot(parkingLot);
 
+        Vehicle vehicle = new Vehicle(vehicleTypeId, registrationNumber, color);
+        pickedParkingSlotOptional.ifPresent(pickedParkingSlot -> parkingLot.parkVehicle(vehicle, pickedParkingSlot));
+
+        return pickedParkingSlotOptional.map(pickedParkingSlot -> getTicketId(parkingLotId, pickedParkingSlot));
+    }
+
+    private String getTicketId(String parkingLotId, PickedParkingSlot pickedParkingSlot) {
+        return String.format("%s_%d_%d", parkingLotId, pickedParkingSlot.getFloorNumber(),
+                pickedParkingSlot.getParkingSlotNumber());
+    }
+
+    public Vehicle unpark(String ticketId) {
+        // TODO ticket id validation
+        String[] ticketIdComponents = ticketId.split("_");
+        String parkingLotId = ticketIdComponents[0];
+        int floorNumber = Integer.parseInt(ticketIdComponents[1]);
+        int slotNumber = Integer.parseInt(ticketIdComponents[2]);
+
+        ParkingLot parkingLot = parkingLots.get(parkingLotId);
+
+        return parkingLot.unpark(floorNumber, slotNumber);
     }
 }

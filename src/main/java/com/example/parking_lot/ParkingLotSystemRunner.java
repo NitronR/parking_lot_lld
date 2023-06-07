@@ -1,6 +1,7 @@
 package com.example.parking_lot;
 
 import com.example.parking_lot.commands.*;
+import com.example.parking_lot.system.FirstFreeParkingPicker;
 import com.example.parking_lot.system.ParkingLotSystem;
 
 import java.io.FileInputStream;
@@ -17,7 +18,7 @@ public class ParkingLotSystemRunner {
             return;
         }
 
-        ParkingLotSystem system = new ParkingLotSystem();
+        ParkingLotSystem system = new ParkingLotSystem(new FirstFreeParkingPicker());
         List<ParkingLotCommand> commands = Arrays.asList(
                 new CreateParkingLotCommand(),
                 new ParkVehicleCommand(),
