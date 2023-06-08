@@ -6,13 +6,15 @@ import com.google.common.collect.ImmutableList;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import static com.example.parking_lot.commands.constants.VehicleTypeIds.*;
 
 public class CreateParkingLotCommand implements ParkingLotCommand {
 
     public static final String RESULT_MSG_TEMPLATE = "Created parking lot with %d floors "
-            + "and %d slots per floor";
+            + "and %d slots per floor\n";
 
     @Override
     public boolean applicableFor(String commandLine) {
@@ -20,7 +22,8 @@ public class CreateParkingLotCommand implements ParkingLotCommand {
     }
 
     @Override
-    public CommandResult execute(ParkingLotSystem parkingLotSystem, String commandLine) {
+    public CommandResult execute(ParkingLotSystem parkingLotSystem, String commandLine,
+                                 Map<String, Optional<String>> extraArgs) {
         String[] commandAndArgs = commandLine.split(" ");
 
         String parkingLotId = commandAndArgs[1];
@@ -30,7 +33,7 @@ public class CreateParkingLotCommand implements ParkingLotCommand {
         parkingLotSystem.createParkingLot(parkingLotId, numFloors, getDefaultParkingSlots(numSlots));
 
         String resultMessage = String.format(RESULT_MSG_TEMPLATE, numFloors, numSlots);
-        return new CommandResultImpl(resultMessage);
+        return new CreateParkingLotCommandResult(resultMessage, parkingLotId);
     }
 
     private List<ParkingSlot> getDefaultParkingSlots(int numSlots) {

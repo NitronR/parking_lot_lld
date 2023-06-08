@@ -3,6 +3,9 @@ package com.example.parking_lot.commands;
 
 import com.example.parking_lot.system.ParkingLotSystem;
 
+import java.util.Map;
+import java.util.Optional;
+
 /**
  * The ParkingLotCommand interface represents a command that can be executed on a ParkingLotSystem.
  */
@@ -22,5 +25,5 @@ public interface ParkingLotCommand {
      * @param system      the ParkingLotSystem on which the command will be executed
      * @param commandLine the command line string
      */
-    CommandResult execute(ParkingLotSystem system, String commandLine);
+    CommandResult execute(ParkingLotSystem system, String commandLine, Map<String, Optional<String>> extraArgs);
 }

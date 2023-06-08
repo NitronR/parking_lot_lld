@@ -1,13 +1,15 @@
 package parking_lot.commands;
 
-import com.example.parking_lot.system.ParkingLotSystem;
 import com.example.parking_lot.commands.CommandResult;
 import com.example.parking_lot.commands.CreateParkingLotCommand;
+import com.example.parking_lot.system.ParkingLotSystem;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+
+import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.times;
@@ -39,7 +41,8 @@ public class CreateParkingLotCommandTests {
 
         String createParkingLotCommandLine = String.format(CREATE_PARKING_LOT_CMD_TEMPLATE, DUMMY_PARKING_LOT_ID,
                 numFloors, numSlots);
-        CommandResult commandResult = createParkingLotCommand.execute(parkingLotSystem, createParkingLotCommandLine);
+        CommandResult commandResult = createParkingLotCommand.execute(parkingLotSystem, createParkingLotCommandLine,
+                Collections.emptyMap());
 
         String expectedResult = "Created parking lot with 2 floors and 6 slots per floor";
 
@@ -65,7 +68,8 @@ public class CreateParkingLotCommandTests {
 
         String createParkingLotCommandLine = String.format("create_parking_lot %s %d %d", DUMMY_PARKING_LOT_ID,
                 numFloors, numSlots);
-        CommandResult commandResult = createParkingLotCommand.execute(parkingLotSystem, createParkingLotCommandLine);
+        CommandResult commandResult = createParkingLotCommand.execute(parkingLotSystem, createParkingLotCommandLine,
+                Collections.emptyMap());
 
         String expectedResult = "Created parking lot with 1 floors and 6 slots per floor";
 

@@ -1,7 +1,9 @@
 package com.example.parking_lot.system;
 
+import com.example.parking_lot.exception.InvalidTicketException;
 import com.example.parking_lot.system.exception.ParkingLotAlreadyExists;
 import com.example.parking_lot.system.exception.ParkingLotNotFound;
+import com.example.parking_lot.system.exception.VehicleNotPresentException;
 
 import java.util.List;
 import java.util.Map;
@@ -70,12 +72,25 @@ public class ParkingLotSystem {
     public Vehicle unpark(String ticketId) {
         // TODO ticket id validation
         String[] ticketIdComponents = ticketId.split("_");
-        String parkingLotId = ticketIdComponents[0];
-        int floorNumber = Integer.parseInt(ticketIdComponents[1]);
-        int slotNumber = Integer.parseInt(ticketIdComponents[2]);
 
-        ParkingLot parkingLot = parkingLots.get(parkingLotId);
+        if (ticketIdComponents.length != 3) {
+            throw new InvalidTicketException("Invalid Ticket");
+        }
 
-        return parkingLot.unpark(floorNumber, slotNumber);
+        try {
+            String parkingLotId = ticketIdComponents[0];
+            int floorNumber = Integer.parseInt(ticketIdComponents[1]);
+            int slotNumber = Integer.parseInt(ticketIdComponents[2]);
+
+            if (!parkingLots.containsKey(parkingLotId)) {
+                throw new InvalidTicketException("Invalid Ticket");
+            }
+
+            ParkingLot parkingLot = parkingLots.get(parkingLotId);
+
+            return parkingLot.unpark(floorNumber, slotNumber);
+        } catch (NumberFormatException | VehicleNotPresentException exception) {
+            throw new InvalidTicketException("Invalid Ticket");
+        }
     }
 }

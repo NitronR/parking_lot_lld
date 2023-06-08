@@ -15,6 +15,7 @@ dependencies {
     // https://projectlombok.org
     compileOnly("org.projectlombok:lombok:1.18.26")
     annotationProcessor("org.projectlombok:lombok:1.18.20")
+    implementation("com.google.guava:guava:32.0.0-jre")
 }
 
 // Configure Gradle IntelliJ Plugin

@@ -42,6 +42,10 @@ public class ParkingFloor {
     }
 
     public Vehicle unpark(int slotNumber) {
+        if (slotNumber > parkedVehicles.size()) {
+            throw new VehicleNotPresentException("No parked vehicle available at this slot.");
+        }
+
         Vehicle parkedVehicle = parkedVehicles.get(slotNumber - 1)
                 .orElseThrow(() -> new VehicleNotPresentException("No parked vehicle available at this slot."));
 

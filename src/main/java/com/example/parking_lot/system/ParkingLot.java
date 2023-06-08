@@ -1,5 +1,6 @@
 package com.example.parking_lot.system;
 
+import com.example.parking_lot.system.exception.VehicleNotPresentException;
 import lombok.Getter;
 
 import java.util.List;
@@ -26,6 +27,10 @@ public class ParkingLot {
     }
 
     public Vehicle unpark(int floorNumber, int slotNumber) {
+        if (floorNumber > floors.size()) {
+            throw new VehicleNotPresentException("No such floor exists.");
+        }
+
         return floors.get(floorNumber - 1).unpark(slotNumber);
     }
 
