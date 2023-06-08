@@ -88,7 +88,7 @@ public class ParkingLotSystemTests {
 
         ParkingLot parkingLot = system.createParkingLot(DUMMY_PARKING_LOT_ID, numFloors, DUMMY_SLOTS_LAYOUT);
 
-        when(parkingStrategy.pickParkingSlot(parkingLot))
+        when(parkingStrategy.pickParkingSlot(parkingLot, CAR_TYPE))
                 .thenReturn(Optional.of(new PickedParkingSlot(1, 4)));
 
         system.park(DUMMY_PARKING_LOT_ID, CAR_TYPE, DUMMY_REGISTRATION_NUMBER, DUMMY_COLOR_RED);
@@ -103,7 +103,7 @@ public class ParkingLotSystemTests {
 
         ParkingLot parkingLot = system.createParkingLot(DUMMY_PARKING_LOT_ID, numFloors, DUMMY_SLOTS_LAYOUT);
 
-        when(parkingStrategy.pickParkingSlot(parkingLot))
+        when(parkingStrategy.pickParkingSlot(parkingLot, CAR_TYPE))
                 .thenReturn(Optional.of(new PickedParkingSlot(1, 1)));
 
         Optional<String> ticketIdOptional = system.park(DUMMY_PARKING_LOT_ID, CAR_TYPE, DUMMY_REGISTRATION_NUMBER,
@@ -119,7 +119,7 @@ public class ParkingLotSystemTests {
 
         ParkingLot parkingLot = system.createParkingLot(DUMMY_PARKING_LOT_ID, numFloors, DUMMY_SLOTS_LAYOUT);
 
-        when(parkingStrategy.pickParkingSlot(parkingLot))
+        when(parkingStrategy.pickParkingSlot(parkingLot, BIKE_TYPE))
                 .thenReturn(Optional.of(new PickedParkingSlot(2, 3)));
 
         system.park(DUMMY_PARKING_LOT_ID, BIKE_TYPE, DUMMY_REGISTRATION_NUMBER, DUMMY_COLOR_RED);
@@ -134,7 +134,7 @@ public class ParkingLotSystemTests {
 
         ParkingLot parkingLot = system.createParkingLot(DUMMY_PARKING_LOT_ID, numFloors, DUMMY_SLOTS_LAYOUT);
 
-        when(parkingStrategy.pickParkingSlot(parkingLot))
+        when(parkingStrategy.pickParkingSlot(parkingLot, CAR_TYPE))
                 .thenReturn(Optional.empty());
 
         Optional<String> ticketIdOptional =
@@ -154,7 +154,7 @@ public class ParkingLotSystemTests {
 
         ParkingLot parkingLot = system.createParkingLot(DUMMY_PARKING_LOT_ID, numFloors, DUMMY_SLOTS_LAYOUT);
 
-        when(parkingStrategy.pickParkingSlot(parkingLot))
+        when(parkingStrategy.pickParkingSlot(parkingLot, BIKE_TYPE))
                 .thenReturn(Optional.of(new PickedParkingSlot(2, 3)));
 
         system.park(DUMMY_PARKING_LOT_ID, BIKE_TYPE, DUMMY_REGISTRATION_NUMBER, DUMMY_COLOR_RED);
@@ -174,7 +174,7 @@ public class ParkingLotSystemTests {
 
         ParkingLot parkingLot = system.createParkingLot(DUMMY_PARKING_LOT_ID, numFloors, DUMMY_SLOTS_LAYOUT);
 
-        when(parkingStrategy.pickParkingSlot(parkingLot))
+        when(parkingStrategy.pickParkingSlot(parkingLot, CAR_TYPE))
                 .thenReturn(Optional.of(new PickedParkingSlot(1, 4)));
 
         system.park(DUMMY_PARKING_LOT_ID, CAR_TYPE, DUMMY_REGISTRATION_NUMBER, DUMMY_COLOR_RED);
@@ -195,7 +195,7 @@ public class ParkingLotSystemTests {
 
         ParkingLot parkingLot = system.createParkingLot(DUMMY_PARKING_LOT_ID, numFloors, DUMMY_SLOTS_LAYOUT);
 
-        when(parkingStrategy.pickParkingSlot(parkingLot))
+        when(parkingStrategy.pickParkingSlot(parkingLot, CAR_TYPE))
                 .thenReturn(Optional.of(new PickedParkingSlot(2, 5)));
 
         system.park(DUMMY_PARKING_LOT_ID, CAR_TYPE, DUMMY_REGISTRATION_NUMBER, DUMMY_COLOR_RED);
@@ -217,7 +217,7 @@ public class ParkingLotSystemTests {
 
         ParkingLot parkingLot = system.createParkingLot(DUMMY_PARKING_LOT_ID, numFloors, DUMMY_SLOTS_LAYOUT);
 
-        when(parkingStrategy.pickParkingSlot(parkingLot))
+        when(parkingStrategy.pickParkingSlot(parkingLot, BIKE_TYPE))
                 .thenReturn(Optional.of(new PickedParkingSlot(2, 3)));
 
         system.park(DUMMY_PARKING_LOT_ID, BIKE_TYPE, DUMMY_REGISTRATION_NUMBER, DUMMY_COLOR_RED);
@@ -239,7 +239,7 @@ public class ParkingLotSystemTests {
 
         ParkingLot parkingLot = system.createParkingLot(DUMMY_PARKING_LOT_ID, numFloors, DUMMY_SLOTS_LAYOUT);
 
-        when(parkingStrategy.pickParkingSlot(parkingLot))
+        when(parkingStrategy.pickParkingSlot(parkingLot, CAR_TYPE))
                 .thenReturn(Optional.of(new PickedParkingSlot(2, 5)));
 
         system.park(DUMMY_PARKING_LOT_ID, CAR_TYPE, DUMMY_REGISTRATION_NUMBER, DUMMY_COLOR_RED);
@@ -258,7 +258,7 @@ public class ParkingLotSystemTests {
 
         ParkingLot parkingLot = system.createParkingLot(DUMMY_PARKING_LOT_ID, numFloors, DUMMY_SLOTS_LAYOUT);
 
-        when(parkingStrategy.pickParkingSlot(parkingLot))
+        when(parkingStrategy.pickParkingSlot(parkingLot, CAR_TYPE))
                 .thenReturn(Optional.of(new PickedParkingSlot(2, 5)));
 
         system.park(DUMMY_PARKING_LOT_ID, CAR_TYPE, DUMMY_REGISTRATION_NUMBER, DUMMY_COLOR_RED);
@@ -280,7 +280,7 @@ public class ParkingLotSystemTests {
 
         ParkingLot parkingLot = system.createParkingLot(DUMMY_PARKING_LOT_ID, numFloors, DUMMY_SLOTS_LAYOUT);
 
-        when(parkingStrategy.pickParkingSlot(parkingLot))
+        when(parkingStrategy.pickParkingSlot(parkingLot, BIKE_TYPE))
                 .thenReturn(Optional.of(new PickedParkingSlot(2, 3)));
 
         system.park(DUMMY_PARKING_LOT_ID, BIKE_TYPE, DUMMY_REGISTRATION_NUMBER, DUMMY_COLOR_RED);

@@ -22,6 +22,7 @@ public class ParkingLotSystem {
             throw new ParkingLotAlreadyExists("Parking lot already exists with given ID.");
         }
 
+        // TODO factory for parking lot creation
         ParkingLot parkingLot = new ParkingLot(parkingLotId, numFloors, parkingSlots);
         parkingLots.put(parkingLotId, parkingLot);
 
@@ -52,7 +53,8 @@ public class ParkingLotSystem {
                                  String color) {
         // TODO check if parkingLotId valid
         ParkingLot parkingLot = parkingLots.get(parkingLotId);
-        Optional<PickedParkingSlot> pickedParkingSlotOptional = parkingPickerStrategy.pickParkingSlot(parkingLot);
+        Optional<PickedParkingSlot> pickedParkingSlotOptional =
+                parkingPickerStrategy.pickParkingSlot(parkingLot, vehicleTypeId);
 
         Vehicle vehicle = new Vehicle(vehicleTypeId, registrationNumber, color);
         pickedParkingSlotOptional.ifPresent(pickedParkingSlot -> parkingLot.parkVehicle(vehicle, pickedParkingSlot));

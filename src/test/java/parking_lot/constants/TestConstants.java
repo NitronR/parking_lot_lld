@@ -1,6 +1,7 @@
 package parking_lot.constants;
 
 import com.example.parking_lot.system.ParkingSlot;
+import com.example.parking_lot.system.Vehicle;
 import com.google.common.collect.ImmutableList;
 
 import static com.example.parking_lot.commands.constants.VehicleTypeIds.*;
@@ -18,4 +19,6 @@ public class TestConstants {
             .build();
     public static final String DUMMY_REGISTRATION_NUMBER = "122";
     public static final String DUMMY_COLOR_RED = "Red";
+    public static final Vehicle DUMMY_CAR = new Vehicle(CAR_TYPE, DUMMY_REGISTRATION_NUMBER, DUMMY_COLOR_RED);
+    public static final Vehicle DUMMY_BIKE = new Vehicle(BIKE_TYPE, DUMMY_REGISTRATION_NUMBER, DUMMY_COLOR_RED);
 }
